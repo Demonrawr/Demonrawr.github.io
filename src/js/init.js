@@ -171,7 +171,7 @@ function init() {
 		
 	});
 	*/
-	geometry = new THREE.PlaneGeometry( 1000, 1000, 10, 10 );
+	geometry = new THREE.PlaneGeometry( 10000, 10000, 10, 10 );
 	geometry.rotateX( - Math.PI / 2 );
 	floorTexture = new THREE.TextureLoader().load( 'src/textures/wood.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
