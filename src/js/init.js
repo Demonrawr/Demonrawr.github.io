@@ -13,7 +13,7 @@ function init() {
 	scene.add( light1 );
 	controls = new THREE.PointerLockControls( camera );
 	scene.add( controls.getObject() );
-	
+	var counter = 0;
 	//Switch statement for user's input
 	var onKeyDown = function ( event ) {
 		switch ( event.keyCode ) {
@@ -22,7 +22,7 @@ function init() {
 				break;
 			case 87: // w
 				moveForward = true;
-				play(stepsAudio);
+				counter++;
 				break;
 			case 65: // a
 				moveLeft = true; 
@@ -58,7 +58,6 @@ function init() {
 				rotate = false;
 				break;
 			case 87: // w
-				stop(stepsAudio);
 				moveForward = false;
 				break;
 			case 65: // a
@@ -171,11 +170,11 @@ function init() {
 		
 	});
 	*/
-	geometry = new THREE.PlaneGeometry( 10000, 10000, 10, 10 );
+	geometry = new THREE.PlaneGeometry( 5000, 5000, 10, 10 );
 	geometry.rotateX( - Math.PI / 2 );
 	floorTexture = new THREE.TextureLoader().load( 'src/textures/wood.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-	floorTexture.repeat.set(20, 20);
+	floorTexture.repeat.set(2000, 2000);
 	material = new THREE.MeshBasicMaterial({map: floorTexture}),
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
