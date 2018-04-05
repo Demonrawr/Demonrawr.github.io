@@ -4,7 +4,7 @@ function init() {
 	camera.position.x= 10; 
 	camera.position.z= 15;
 	scene = new THREE.Scene();
-	scene.fog = new THREE.Fog( 0xffffff, 0, 1000 );
+	scene.fog = new THREE.Fog( 0xffffff, 10, 1100 );
 	var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 	light.position.set( 0.5, 1, 0.75 );
 	scene.add( light );
@@ -99,7 +99,8 @@ function init() {
 	manager.onProgress = function ( item, loaded, total ) {
 		console.log( item, loaded, total );
 	};
-	var texture = new THREE.Texture();
+	var LexusTexture = new THREE.Texture();
+	var CokeTexture = new THREE.Texture();
 	
 	var onProgress = function ( xhr ) {
 		if ( xhr.lengthComputable ) {
@@ -111,10 +112,11 @@ function init() {
 	};
 	
 	// Lexus texture
+	
 	var loader = new THREE.ImageLoader( manager );
 	loader.load( 'Lexus/Lexus/Lexus jpg.jpg', function ( image ) {
-		texture.image = image;
-		texture.needsUpdate = true;
+		LexusTexture.image = image;
+		LexusTexture.needsUpdate = true;
 	} );
 	
 	
@@ -125,12 +127,14 @@ function init() {
 	loader.load( 'Lexus/Lexus/lexus_hs.obj', function ( object1 ) {
 		object1.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = texture;
+				child.material.map = LexusTexture;
 			}
 		} );
 		object1.position.x = 10;
-		object1.position.y=1.3;
+		object1.position.y= 0.1;
+		object1.position.z= 50;
 		object1.rotation.y=(-115*Math.PI/180);
+		object1.scale.set(2,2,2);
 		scene.add( object1 );
 		car = object1;
 	}, onProgress, onError );
@@ -170,14 +174,60 @@ function init() {
 		
 	});
 	*/
-	geometry = new THREE.PlaneGeometry( 5000, 5000, 10, 10 );
+	
+	//Floor
+	
+	geometry = new THREE.PlaneGeometry( 4000, 4000, 10, 10 );
 	geometry.rotateX( - Math.PI / 2 );
 	floorTexture = new THREE.TextureLoader().load( 'src/textures/wood.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-	floorTexture.repeat.set(2000, 2000);
+	floorTexture.repeat.set(200, 200);
 	material = new THREE.MeshBasicMaterial({map: floorTexture}),
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
+	
+	//Sky
+	var sgeometry = new THREE.SphereGeometry(1000, 60, 40);
+		var smaterial = new THREE.MeshBasicMaterial();
+		smaterial.map = THREE.ImageUtils.loadTexture("src/textures/sky2.jpg");
+		smaterial.side = THREE.BackSide;
+		var skydome = new THREE.Mesh(sgeometry, smaterial);
+		scene.add(skydome);
+		
+	//Wall
+	var geometry = new THREE.BoxGeometry( 20, 10, 1 );
+	var cmaterial = new THREE.MeshBasicMaterial();
+	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/cogswell.jpg");
+	var cube = new THREE.Mesh( geometry, cmaterial );
+	cube.position.y = 5;
+	scene.add( cube );
+	
+	var wgeometry = new THREE.BoxGeometry( 400, 75, 1 );
+	var wmaterial = new THREE.MeshBasicMaterial();
+	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
+	var cube2 = new THREE.Mesh( wgeometry, wmaterial );
+	cube2.position.z = -30;
+	scene.add( cube2 );
+	
+	//Coke
+	var cokeloader = new THREE.ImageLoader( manager );
+	cokeloader.load( 'Coke/Cola.jpg', function ( image ) {
+		CokeTexture.image = image;
+		CokeTexture.needsUpdate = true;
+	} );
+	
+	var ccloader = new THREE.OBJLoader( manager );
+	ccloader.load( 'Coke/Coke.obj', function ( CokeB ) {
+		CokeB.traverse( function ( child ) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material.map = CokeTexture;
+			}
+		} );
+		CokeB.position.z = -100;
+		scene.add( CokeB );
+	}, onProgress, onError );
+	
+	
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setClearColor( 0xffffff );
