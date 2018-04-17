@@ -1,8 +1,8 @@
 function init() {
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
 	//Starting position X/Y Coordinates
-	camera.position.x= 10; 
-	camera.position.z= 15;
+	//camera.position.x= 10; 
+	//camera.position.z= 15;
 	scene = new THREE.Scene();
 	scene.fog = new THREE.Fog( 0xffffff, 10, 1100 );
 	var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -46,7 +46,9 @@ function init() {
 				carRight = true;
 				break;
 			case 32: // space
-				if ( canJump === true ) velocity.y += 350;
+				readTextFile("file:///C:/Users/Test/Desktop/Demonrawr.github.io/src/js/test.txt");
+				if ( canJump === true ) 
+				velocity.y += 350;
 				canJump = false;
 				break;
 		}
