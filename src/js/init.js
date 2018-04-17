@@ -46,7 +46,7 @@ function init() {
 				carRight = true;
 				break;
 			case 32: // space
-				readTextFile("file:///C:/Users/Test/Desktop/Demonrawr.github.io/src/js/test.txt");
+				//readTextFile("file:///C:/Users/Test/Desktop/Demonrawr.github.io/src/js/test.txt");
 				if ( canJump === true ) 
 				velocity.y += 350;
 				canJump = false;
