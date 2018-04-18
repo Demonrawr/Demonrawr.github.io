@@ -10,8 +10,10 @@ function readTextFile(file)
             {
                 var allText = rawFile.responseText;
 				var textByLine = allText.split("\n");
-                //alert(textByLine[0]);
-				controls.getObject().position.x = parseInt(textByLine[1]);
+        
+				controls.getObject().position.x = parseInt(textByLine[0]);
+				controls.getObject().position.y = parseInt(textByLine[1]);
+				controls.getObject().position.z = parseInt(textByLine[2]);
             }
         }
     }
