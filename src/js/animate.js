@@ -15,7 +15,6 @@ function animate() {
 		
 		velocity.x -= velocity.x * 10.0 * delta;
 		velocity.z -= velocity.z * 10.0 * delta;
-		
 		velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
 		
 		if ( moveForward ) velocity.z -= 350.0 * delta;
@@ -23,16 +22,12 @@ function animate() {
 		if ( moveLeft ) velocity.x -= 350.0 * delta;
 		if ( moveRight ) velocity.x += 350.0 * delta;
 		if ( rotate ) car.rotation.y += camera.position.x * .005;
-		if ( carForward ) car.position.z -= .75;
-		if ( carBackward ) car.position.z += .75;
-		if ( carLeft ) car.position.x -= .75;
-		if ( carRight ) car.position.x += .75;
 		if ( isOnObject === true ) {
 			velocity.y = Math.max( 0, velocity.y );
 			canJump = true;
+			alert("lol");
 		}
-
-		
+        
 		controls.getObject().translateX( velocity.x * delta );
 		controls.getObject().translateY( velocity.y * delta );
 		controls.getObject().translateZ( velocity.z * delta );

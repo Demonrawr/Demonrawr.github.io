@@ -41,9 +41,9 @@
 				cursor: pointer;
 			}
 			.dropbtn {
-				background-color: #3498DB;
+				background-color: #4CAF50;
 				color: white;
-				padding: 15px;
+				padding: 16px;
 				font-size: 16px;
 				border: none;
 				cursor: pointer;
@@ -81,16 +81,15 @@
 				z-index: 1;
 			}
 
-			.dropdown-content p {
+			.dropdown-content a {
 				color: black;
-				padding: 12px 16px;
 				text-decoration: none;
 				display: block;
 			}
 
-			.dropdown p:hover {background-color: #ddd}
+			.dropdown a:hover {background-color: #ddd}
 			
-			.button{
+			.dropdown .button{
 				background-color: #3e8e41;
 				border: none;
 				color: white;
@@ -102,10 +101,11 @@
 				margin: 3px 2px;
 				cursor: pointer;
 			}
-			.button:hover {
+			.dropdown .button:hover {
 				background-color: #008CBA;
 				color: white;
 			}
+
 			.show {display:block;}
 		</style>
 	</head>
@@ -121,6 +121,7 @@
 		<script src="examples/js/libs/stats.min.js"></script>
 		<script src="examples/js/libs/charsetencoder.min.js"></script>
 		<script src="examples/js/libs/ammo.js"></script>
+		<script src="src/js/math/Box3.js"></script>
 		<script src="src/js/audioPlayer.js"></script>
 		<script src="src/js/init.js"></script>
 		<script src="src/js/readFile.js"></script>
@@ -139,11 +140,11 @@
 		</div>
 		
 		<div class="dropdown">
-		<button onclick="myFunction()" class="dropbtn">Menu     </button>
+		<button onclick="myFunction()" class="dropbtn">Menu:</button>
 		  <div id="myDropdown" class="dropdown-content">
 			<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-			<button class="button" onclick="readTextFile('Coke/cola.txt')">Cola</button>
-			<button class="button" onclick="test()">Lexus</button>
+			<a href="#lol"><button class="button" onclick="readTextFile('Coke/cola.txt')">Cola</button></a>
+			<a href="#ls"><button class="button" onclick="test()">Lexus</button></a>
 		  </div>
 		</div>
 
@@ -151,12 +152,13 @@
 			function myFunction() {
 				document.getElementById("myDropdown").classList.toggle("show");
 			}
+
 			function filterFunction() {
 				var input, filter, ul, li, a, i;
 				input = document.getElementById("myInput");
 				filter = input.value.toUpperCase();
 				div = document.getElementById("myDropdown");
-				a = div.getElementsByTagName("p");
+				a = div.getElementsByTagName("a");
 				for (i = 0; i < a.length; i++) {
 					if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
 						a[i].style.display = "";

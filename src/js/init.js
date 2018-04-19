@@ -139,6 +139,7 @@ function init() {
 		object1.scale.set(2,2,2);
 		scene.add( object1 );
 		car = object1;
+		objects.push(object1);
 	}, onProgress, onError );
 	
 	// Ship
@@ -159,6 +160,9 @@ function init() {
 		}, onProgress, onError );
 	});
 	
+	//if (collision==true){
+	//	alert("lol");
+	//}
 	/*
 	// City models //
 	var mtlLoader = new THREE.MTLLoader();
@@ -203,6 +207,7 @@ function init() {
 	var cube = new THREE.Mesh( geometry, cmaterial );
 	cube.position.y = 5;
 	scene.add( cube );
+	objects.push(cube);
 	
 	var wgeometry = new THREE.BoxGeometry( 400, 75, 1 );
 	var wmaterial = new THREE.MeshBasicMaterial();
@@ -210,6 +215,7 @@ function init() {
 	var cube2 = new THREE.Mesh( wgeometry, wmaterial );
 	cube2.position.z = -30;
 	scene.add( cube2 );
+	objects.push(cube2);
 	
 	//Coke
 	var cokeloader = new THREE.ImageLoader( manager );
@@ -226,11 +232,9 @@ function init() {
 			}
 		} );
 		CokeB.position.z = -100;
-		scene.add( CokeB );
 	}, onProgress, onError );
 	
 	
-
 	renderer = new THREE.WebGLRenderer();
 	renderer.setClearColor( 0xffffff );
 	renderer.setPixelRatio( window.devicePixelRatio );
