@@ -168,11 +168,13 @@
 				}
 			}
 			var camera, scene, renderer;
+			var mouse = new THREE.Vector2(), INTERSECTED;
 			var clock = new THREE.Clock();
 			var windowHalfX = window.innerWidth / 2;
 			var windowHalfY = window.innerHeight / 2;
 			var car;
 			var ship;
+			var cokemodel;
 			var geometry, material, mesh;
 			var controls;
 			var objects = [];
@@ -232,11 +234,6 @@
 			window.onload = init();
 			// Variables for user input, set to false
 			var controlsEnabled = false;
-			var carForward = false;
-			var carBackward = false;
-			var carLeft = false;
-			var carRight = false;
-			var rotate = false;
 			var moveForward = false;
 			var moveBackward = false;
 			var moveLeft = false;

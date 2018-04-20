@@ -1,8 +1,5 @@
 function init() {
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
-	//Starting position X/Y Coordinates
-	//camera.position.x= 10; 
-	//camera.position.z= 15;
 	scene = new THREE.Scene();
 	scene.fog = new THREE.Fog( 0xffffff, 10, 1100 );
 	var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -13,16 +10,12 @@ function init() {
 	scene.add( light1 );
 	controls = new THREE.PointerLockControls( camera );
 	scene.add( controls.getObject() );
-	var counter = 0;
+	
 	//Switch statement for user's input
 	var onKeyDown = function ( event ) {
 		switch ( event.keyCode ) {
-			case 81:
-				rotate = true;
-				break;
 			case 87: // w
 				moveForward = true;
-				counter++;
 				break;
 			case 65: // a
 				moveLeft = true; 
@@ -33,20 +26,7 @@ function init() {
 			case 68: // d
 				moveRight = true;
 				break;
-			
-			case 38: // up
-				carForward = true;
-				break;
-			case 37: // left
-				carLeft = true; break;
-			case 40: // down
-				carBackward = true;
-				break;
-			case 39: // right
-				carRight = true;
-				break;
 			case 32: // space
-				//readTextFile("file:///C:/Users/Test/Desktop/Demonrawr.github.io/src/js/test.txt");
 				if ( canJump === true ) 
 				velocity.y += 350;
 				canJump = false;
@@ -56,11 +36,9 @@ function init() {
 	
 	var onKeyUp = function ( event ) {
 		switch ( event.keyCode ) {
-			case 81:
-				rotate = false;
-				break;
 			case 87: // w
 				moveForward = false;
+				moveBackward = false;
 				break;
 			case 65: // a
 				moveLeft = false; 
@@ -70,18 +48,6 @@ function init() {
 				break;
 			case 68: // d
 				moveRight = false;
-				break;
-			case 38: // up
-				carForward = false;
-				break;
-			case 37: // left
-				carLeft = false; 
-				break;
-			case 40: // down
-				carBackward = false;
-				break;
-			case 39: // right
-				carRight = false;
 				break;
 			case 32: // space
 				if ( canJump === false ) velocity.y += 350;
@@ -160,27 +126,6 @@ function init() {
 		}, onProgress, onError );
 	});
 	
-	//if (collision==true){
-	//	alert("lol");
-	//}
-	/*
-	// City models //
-	var mtlLoader = new THREE.MTLLoader();
-	mtlLoader.setBaseUrl( 'City/' );
-	mtlLoader.setPath( 'City/' );
-	mtlLoader.load( 'The_City.mtl', function( materials ) {
-		materials.preload();
-		var objLoader = new THREE.OBJLoader();
-		objLoader.setMaterials( materials );
-		objLoader.setPath( 'City/' );
-		objLoader.load( 'City.obj', function ( object ) {
-			object.position.y = -39;
-			scene.add( object );
-		}, onProgress, onError );
-		
-	});
-	*/
-	
 	//Floor
 	
 	geometry = new THREE.PlaneGeometry( 4000, 4000, 10, 10 );
@@ -195,13 +140,14 @@ function init() {
 	//Sky
 	var sgeometry = new THREE.SphereGeometry(1000, 60, 40);
 		var smaterial = new THREE.MeshBasicMaterial();
-		smaterial.map = THREE.ImageUtils.loadTexture("src/textures/sky2.jpg");
+		smaterial.map = THREE.ImageUtils.loadTexture("src/textures/sky4.jpg");
 		smaterial.side = THREE.BackSide;
 		var skydome = new THREE.Mesh(sgeometry, smaterial);
+		skydome.position.y = -105;
 		scene.add(skydome);
 		
 	//Wall
-	var geometry = new THREE.BoxGeometry( 20, 10, 1 );
+	var geometry = new THREE.BoxGeometry( 20, 10, 5 );
 	var cmaterial = new THREE.MeshBasicMaterial();
 	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/cogswell.jpg");
 	var cube = new THREE.Mesh( geometry, cmaterial );
@@ -209,13 +155,44 @@ function init() {
 	scene.add( cube );
 	objects.push(cube);
 	
-	var wgeometry = new THREE.BoxGeometry( 400, 75, 1 );
+	var wgeometry = new THREE.BoxGeometry( 400, 75, 15 );
 	var wmaterial = new THREE.MeshBasicMaterial();
 	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
-	var cube2 = new THREE.Mesh( wgeometry, wmaterial );
-	cube2.position.z = -30;
-	scene.add( cube2 );
-	objects.push(cube2);
+	var wall1 = new THREE.Mesh( wgeometry, wmaterial );
+	wall1.position.z = -30;
+	wall1.position.x = -100;
+	wall1.rotation.y=(-90*Math.PI/180);
+	scene.add( wall1 );
+	objects.push(wall1);
+	
+	var wgeometry = new THREE.BoxGeometry( 400, 75, 15 );
+	var wmaterial = new THREE.MeshBasicMaterial();
+	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
+	var wall2 = new THREE.Mesh( wgeometry, wmaterial );
+	wall2.position.z = -30;
+	wall2.position.x = 100;
+	wall2.rotation.y=(-90*Math.PI/180);
+	scene.add( wall2 );
+	objects.push(wall2);
+	
+	var wgeometry = new THREE.BoxGeometry( 400, 75, 15 );
+	var wmaterial = new THREE.MeshBasicMaterial();
+	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
+	var wall2 = new THREE.Mesh( wgeometry, wmaterial );
+	wall2.position.z = -30;
+	wall2.position.x = 100;
+	scene.add( wall2 );
+	objects.push(wall2);
+	
+	//2D Art
+	var geometry = new THREE.BoxGeometry( 30, 15, .05 );
+	var cmaterial = new THREE.MeshBasicMaterial();
+	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/traveler.jpg");
+	var art1 = new THREE.Mesh( geometry, cmaterial );
+	art1.position.y = 15;
+	art1.position.z = -22;
+	scene.add( art1 );
+	objects.push(art1);
 	
 	//Coke
 	var cokeloader = new THREE.ImageLoader( manager );
@@ -232,6 +209,8 @@ function init() {
 			}
 		} );
 		CokeB.position.z = -100;
+		scene.add(CokeB);
+		cokemodel = CokeB;
 	}, onProgress, onError );
 	
 	
@@ -240,7 +219,13 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	
 	window.addEventListener( 'resize', onWindowResize, false );
 	animate();
 }
+function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}

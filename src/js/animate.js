@@ -6,10 +6,10 @@ function onWindowResize() {
 function animate() {
 	
 	if ( controlsEnabled ) {
-		raycaster.ray.origin.copy( controls.getObject().position );
-		raycaster.ray.origin.y -= 10;
-		var intersections = raycaster.intersectObjects( objects );
-		var isOnObject = intersections.length > 0;
+		
+		raycaster.setFromCamera( mouse, camera );
+		var intersects = raycaster.intersectObjects( scene.children );
+		var isOnObject = intersects.length > 0;
 		var time = performance.now();
 		var delta = ( time - prevTime ) / 1000;
 		
@@ -21,11 +21,14 @@ function animate() {
 		if ( moveBackward ) velocity.z += 350.0 * delta;
 		if ( moveLeft ) velocity.x -= 350.0 * delta;
 		if ( moveRight ) velocity.x += 350.0 * delta;
-		if ( rotate ) car.rotation.y += camera.position.x * .005;
+		
 		if ( isOnObject === true ) {
-			velocity.y = Math.max( 0, velocity.y );
-			canJump = true;
-			alert("lol");
+			if ( INTERSECTED != intersects[ 0 ].object ) {
+				if (moveForward){
+					moveForward = false;
+					moveBackward = true;
+				}
+			}
 		}
         
 		controls.getObject().translateX( velocity.x * delta );
@@ -36,8 +39,9 @@ function animate() {
 			controls.getObject().position.y = 10;
 			canJump = true;
 		}
+		
 		//animates 
-		//ship.position.z -= time*.000005; 
+		cokemodel.rotation.y -= time*.0000002; 
 	
 		renderer.clear();
 		renderer.render( scene, camera );
