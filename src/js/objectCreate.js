@@ -1,29 +1,36 @@
-function createObject(scene, path, xpos, ypos, zpos, rotates, scales) {
-	var manager = new THREE.LoadingManager();
-	manager.onProgress = function ( item, loaded, total ) {
+function createObject(pic, model, xpos, ypos, zpos, scale) {
+	var Texture = new THREE.Texture();
+	var smanager = new THREE.LoadingManager();
+	smanager.onProgress = function ( item, loaded, total ) {
 		console.log( item, loaded, total );
 	};
+	var onProgress = function ( xhr ) {
+		if ( xhr.lengthComputable ) {
+			var percentComplete = xhr.loaded / xhr.total * 100;
+			console.log( Math.round(percentComplete, 2) + '% downloaded' );
+		}
+	};
+	var onError = function ( xhr ) {
+	};
 	
-	var texture = new THREE.Texture();
-		
-	var loader = new THREE.ImageLoader( manager );
-	loader.load( 'Lexus/Lexus/Lexus jpg.jpg', function ( image ) {
-		texture.image = image;
-		texture.needsUpdate = true;
+	var lolloader = new THREE.ImageLoader( smanager );
+		lolloader.load( pic, function ( image ) {
+		Texture.image = image;
+		Texture.needsUpdate = true;
 	} );
 	
-	var loader = new THREE.OBJLoader( manager );
-	loader.load( path, function ( objectTest ) {
-		objectTest.traverse( function ( child ) {
+	var cclolloader = new THREE.OBJLoader( smanager );
+	cclolloader.load( model, function ( Obj ) {
+		Obj.traverse( function ( child ) {
 			if ( child instanceof THREE.Mesh ) {
-				child.material.map = texture;
+				child.material.map = Texture;
 			}
 		} );
-		objectTest.position.x = xpos;
-		objectTest.position.y = ypos;
-		objectTest.position.z = zpos;
-		objectTest.rotation.y = (rotates);
-		objectTest.scale.set(scales,scales,scales);
-		scene.add( objectTest );
+		Obj.position.x = xpos;
+		Obj.position.y = ypos;
+		Obj.position.z = zpos;
+		Obj.scale.set(scale,scale,scale);
+		scene.add(Obj);
+		tempo.push(Obj);
 	}, onProgress, onError );
 }

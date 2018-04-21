@@ -60,15 +60,13 @@ function init() {
 	document.addEventListener( 'keyup', onKeyUp, false );
 	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 	
-	
-	// objects
+	// 3D Models
 	
 	var manager = new THREE.LoadingManager();
 	manager.onProgress = function ( item, loaded, total ) {
 		console.log( item, loaded, total );
 	};
 	var LexusTexture = new THREE.Texture();
-	var CokeTexture = new THREE.Texture();
 	
 	var onProgress = function ( xhr ) {
 		if ( xhr.lengthComputable ) {
@@ -79,35 +77,9 @@ function init() {
 	var onError = function ( xhr ) {
 	};
 	
-	// Lexus texture
-	
-	var loader = new THREE.ImageLoader( manager );
-	loader.load( 'Lexus/Lexus/Lexus jpg.jpg', function ( image ) {
-		LexusTexture.image = image;
-		LexusTexture.needsUpdate = true;
-	} );
-	
-	
-	// Car models //
-	
-	// Lexus
-	var loader = new THREE.OBJLoader( manager );
-	loader.load( 'Lexus/Lexus/lexus_hs.obj', function ( object1 ) {
-		object1.traverse( function ( child ) {
-			if ( child instanceof THREE.Mesh ) {
-				child.material.map = LexusTexture;
-			}
-		} );
-		object1.position.x = 10;
-		object1.position.y= 0.1;
-		object1.position.z= 50;
-		object1.rotation.y=(-115*Math.PI/180);
-		object1.scale.set(2,2,2);
-		scene.add( object1 );
-		car = object1;
-		objects.push(object1);
-	}, onProgress, onError );
-	
+	// Lexus Model
+
+	createObject('Lexus/Lexus/Lexus jpg.jpg','Lexus/Lexus/lexus_hs.obj',10,.1,50,2);
 	// Ship
 	var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.setBaseUrl( 'Kameri/' );
@@ -126,18 +98,44 @@ function init() {
 		}, onProgress, onError );
 	});
 	
+	createObject('Coke/Cola.jpg','Coke/Coke.obj',0,0,-100,.5);
+	
+	//2D Art
+	
+	var geometry = new THREE.BoxGeometry( 25, 15, .05 );
+	var cmaterial = new THREE.MeshBasicMaterial();
+	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/cogswell.jpg");
+	var cube = new THREE.Mesh( geometry, cmaterial );
+	cube.position.y = 15;
+	cube.position.z = -15;
+	scene.add( cube );
+	objects.push(cube);
+	
+	var geometry = new THREE.BoxGeometry( 30, 15, .05 );
+	var cmaterial = new THREE.MeshBasicMaterial();
+	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/traveler.jpg");
+	var art1 = new THREE.Mesh( geometry, cmaterial );
+	art1.position.y = 15;
+	art1.position.z = -15;
+	art1.position.x = 50;
+	scene.add( art1 );
+	objects.push(art1);
+	
+	//Environment
+	
 	//Floor
 	
-	geometry = new THREE.PlaneGeometry( 4000, 4000, 10, 10 );
+	geometry = new THREE.PlaneGeometry( 1000, 1000, 10, 10 );
 	geometry.rotateX( - Math.PI / 2 );
 	floorTexture = new THREE.TextureLoader().load( 'src/textures/wood.jpg' );
 	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-	floorTexture.repeat.set(200, 200);
+	floorTexture.repeat.set(100, 100);
 	material = new THREE.MeshBasicMaterial({map: floorTexture}),
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 	
 	//Sky
+	
 	var sgeometry = new THREE.SphereGeometry(1000, 60, 40);
 		var smaterial = new THREE.MeshBasicMaterial();
 		smaterial.map = THREE.ImageUtils.loadTexture("src/textures/sky4.jpg");
@@ -147,72 +145,14 @@ function init() {
 		scene.add(skydome);
 		
 	//Wall
-	var geometry = new THREE.BoxGeometry( 20, 10, 5 );
-	var cmaterial = new THREE.MeshBasicMaterial();
-	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/cogswell.jpg");
-	var cube = new THREE.Mesh( geometry, cmaterial );
-	cube.position.y = 5;
-	scene.add( cube );
-	objects.push(cube);
 	
-	var wgeometry = new THREE.BoxGeometry( 400, 75, 15 );
-	var wmaterial = new THREE.MeshBasicMaterial();
-	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
-	var wall1 = new THREE.Mesh( wgeometry, wmaterial );
-	wall1.position.z = -30;
-	wall1.position.x = -100;
-	wall1.rotation.y=(-90*Math.PI/180);
-	scene.add( wall1 );
-	objects.push(wall1);
-	
-	var wgeometry = new THREE.BoxGeometry( 400, 75, 15 );
-	var wmaterial = new THREE.MeshBasicMaterial();
-	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
-	var wall2 = new THREE.Mesh( wgeometry, wmaterial );
-	wall2.position.z = -30;
-	wall2.position.x = 100;
-	wall2.rotation.y=(-90*Math.PI/180);
-	scene.add( wall2 );
-	objects.push(wall2);
-	
-	var wgeometry = new THREE.BoxGeometry( 400, 75, 15 );
-	var wmaterial = new THREE.MeshBasicMaterial();
-	wmaterial.map = THREE.ImageUtils.loadTexture("src/textures/wall.jpg");
-	var wall2 = new THREE.Mesh( wgeometry, wmaterial );
-	wall2.position.z = -30;
-	wall2.position.x = 100;
-	scene.add( wall2 );
-	objects.push(wall2);
-	
-	//2D Art
-	var geometry = new THREE.BoxGeometry( 30, 15, .05 );
-	var cmaterial = new THREE.MeshBasicMaterial();
-	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/traveler.jpg");
-	var art1 = new THREE.Mesh( geometry, cmaterial );
-	art1.position.y = 15;
-	art1.position.z = -22;
-	scene.add( art1 );
-	objects.push(art1);
-	
-	//Coke
-	var cokeloader = new THREE.ImageLoader( manager );
-	cokeloader.load( 'Coke/Cola.jpg', function ( image ) {
-		CokeTexture.image = image;
-		CokeTexture.needsUpdate = true;
-	} );
-	
-	var ccloader = new THREE.OBJLoader( manager );
-	ccloader.load( 'Coke/Coke.obj', function ( CokeB ) {
-		CokeB.traverse( function ( child ) {
-			if ( child instanceof THREE.Mesh ) {
-				child.material.map = CokeTexture;
-			}
-		} );
-		CokeB.position.z = -100;
-		scene.add(CokeB);
-		cokemodel = CokeB;
-	}, onProgress, onError );
-	
+	wallGenerator(150,0,140,-90); //+z brings back
+	wallGenerator(350,0,10,-90);
+	wallGenerator(-80,0,10,-90);
+	wallGenerator(50,0,-30,0);
+	wallGenerator(0,0,-200,0);
+	wallGenerator(50,0,150,0);
+	//wallGenerator(100,0,-30,0);
 	
 	renderer = new THREE.WebGLRenderer();
 	renderer.setClearColor( 0xffffff );
@@ -224,6 +164,7 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 	animate();
 }
+
 function onDocumentMouseMove( event ) {
 				event.preventDefault();
 				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;

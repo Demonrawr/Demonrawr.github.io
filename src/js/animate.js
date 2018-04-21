@@ -41,8 +41,7 @@ function animate() {
 		}
 		
 		//animates 
-		cokemodel.rotation.y -= time*.0000002; 
-	
+		tempo[1].rotation.y -= time*.0000002; 
 		renderer.clear();
 		renderer.render( scene, camera );
 		
