@@ -6,7 +6,7 @@ function wallGenerator(x, y, z, r){
 	walls.position.z = z;
 	walls.position.x = x;
 	walls.position.y = y;
-	if (r>0 || r<0){
+	if (r!=0){
 		walls.rotation.y=(r*Math.PI/180);
 	}
 	scene.add( walls );

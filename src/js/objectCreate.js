@@ -12,7 +12,6 @@ function createObject(pic, model, xpos, ypos, zpos, scale) {
 	};
 	var onError = function ( xhr ) {
 	};
-	
 	var lolloader = new THREE.ImageLoader( smanager );
 		lolloader.load( pic, function ( image ) {
 		Texture.image = image;

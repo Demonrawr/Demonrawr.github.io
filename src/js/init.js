@@ -102,25 +102,14 @@ function init() {
 	
 	//2D Art
 	
-	var geometry = new THREE.BoxGeometry( 25, 15, .05 );
-	var cmaterial = new THREE.MeshBasicMaterial();
-	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/cogswell.jpg");
-	var cube = new THREE.Mesh( geometry, cmaterial );
-	cube.position.y = 15;
-	cube.position.z = -15;
-	scene.add( cube );
-	objects.push(cube);
-	
-	var geometry = new THREE.BoxGeometry( 30, 15, .05 );
-	var cmaterial = new THREE.MeshBasicMaterial();
-	cmaterial.map = THREE.ImageUtils.loadTexture("src/textures/traveler.jpg");
-	var art1 = new THREE.Mesh( geometry, cmaterial );
-	art1.position.y = 15;
-	art1.position.z = -15;
-	art1.position.x = 50;
-	scene.add( art1 );
-	objects.push(art1);
-	
+	pictureArt("src/textures/cogswell.jpg", 0, 15, -15,0);
+	pictureArt("src/textures/traveler.jpg",50,15,-15,0);
+	pictureArt("src/textures/Henry.jpg",100,15,-15,0);
+	pictureArt("src/textures/Caroline.jpg",150,15,-15,0);
+	pictureArt("src/textures/Nobo.png",-65,15,21,-90)
+	pictureArt("src/textures/sky3.jpg",-65,15,80,-90)
+	pictureArt("src/textures/sky4.jpg",-25,15,135,0)
+	pictureArt("src/textures/sky.jpg",50,15,135,0)
 	//Environment
 	
 	//Floor
@@ -135,7 +124,7 @@ function init() {
 	scene.add( mesh );
 	
 	//Sky
-	
+	/*
 	var sgeometry = new THREE.SphereGeometry(1000, 60, 40);
 		var smaterial = new THREE.MeshBasicMaterial();
 		smaterial.map = THREE.ImageUtils.loadTexture("src/textures/sky4.jpg");
@@ -143,7 +132,7 @@ function init() {
 		var skydome = new THREE.Mesh(sgeometry, smaterial);
 		skydome.position.y = -105;
 		scene.add(skydome);
-		
+	*/
 	//Wall
 	
 	wallGenerator(150,0,140,-90); //+z brings back
