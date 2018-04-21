@@ -103,10 +103,10 @@ function init() {
 	//2D Art
 	
 	pictureArt("src/textures/cogswell.jpg", 0, 15, -15,0);
-	pictureArt("src/textures/traveler.jpg",50,15,-15,0);
+	pictureArt("src/textures/Traveler.jpg",50,15,-15,0);
 	pictureArt("src/textures/Henry.jpg",100,15,-15,0);
 	pictureArt("src/textures/Caroline.jpg",150,15,-15,0);
-	pictureArt("src/textures/Nobo.png",-65,15,21,-90)
+	pictureArt("src/textures/nobo.png",-65,15,21,-90)
 	pictureArt("src/textures/sky3.jpg",-65,15,80,-90)
 	pictureArt("src/textures/sky4.jpg",-25,15,135,0)
 	pictureArt("src/textures/sky.jpg",50,15,135,0)
