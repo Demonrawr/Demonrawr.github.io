@@ -106,10 +106,11 @@ function init() {
 	pictureArt("src/textures/Traveler.jpg",50,15,-15,0);
 	pictureArt("src/textures/Henry.jpg",100,15,-15,0);
 	pictureArt("src/textures/Caroline.jpg",150,15,-15,0);
-	pictureArt("src/textures/nobo.png",-65,15,21,-90)
-	pictureArt("src/textures/sky3.jpg",-65,15,80,-90)
-	pictureArt("src/textures/sky4.jpg",-25,15,135,0)
-	pictureArt("src/textures/sky.jpg",50,15,135,0)
+	pictureArt("src/textures/nobo.png",-65,15,21,-90);
+	pictureArt("src/textures/sky3.jpg",-65,15,80,-90);
+	pictureArt("src/textures/sky4.jpg",-25,15,135,0);
+	pictureArt("src/textures/sky.jpg",50,15,135,0);
+	pictureArt("src/textures/sky.jpg",135,15,82,-90);
 	//Environment
 	
 	//Floor
@@ -136,12 +137,14 @@ function init() {
 	//Wall
 	
 	wallGenerator(150,0,140,-90); //+z brings back
-	wallGenerator(350,0,10,-90);
+	wallGenerator(350,0,-60,-90);
 	wallGenerator(-80,0,10,-90);
 	wallGenerator(50,0,-30,0);
 	wallGenerator(0,0,-200,0);
+	wallGenerator(250,0,-200,0);
+	wallGenerator(-70,0,-90,-90);
 	wallGenerator(50,0,150,0);
-	//wallGenerator(100,0,-30,0);
+	wallGenerator(270,0,50,0)
 	
 	renderer = new THREE.WebGLRenderer();
 	renderer.setClearColor( 0xffffff );
