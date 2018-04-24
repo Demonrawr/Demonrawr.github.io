@@ -26,11 +26,6 @@ function init() {
 			case 68: // d
 				moveRight = true;
 				break;
-			case 32: // space
-				if ( canJump === true ) 
-				velocity.y += 350;
-				canJump = false;
-				break;
 		}
 	};
 	
@@ -48,10 +43,6 @@ function init() {
 				break;
 			case 68: // d
 				moveRight = false;
-				break;
-			case 32: // space
-				if ( canJump === false ) velocity.y += 350;
-				canJump = false;
 				break;
 		}
 	};
@@ -125,7 +116,6 @@ function init() {
 	scene.add( mesh );
 	
 	//Sky
-	/*
 	var sgeometry = new THREE.SphereGeometry(1000, 60, 40);
 		var smaterial = new THREE.MeshBasicMaterial();
 		smaterial.map = THREE.ImageUtils.loadTexture("src/textures/sky4.jpg");
@@ -133,7 +123,7 @@ function init() {
 		var skydome = new THREE.Mesh(sgeometry, smaterial);
 		skydome.position.y = -105;
 		scene.add(skydome);
-	*/
+
 	//Wall
 	
 	wallGenerator(150,0,140,-90); //+z brings back
@@ -142,7 +132,7 @@ function init() {
 	wallGenerator(50,0,-30,0);
 	wallGenerator(0,0,-200,0);
 	wallGenerator(250,0,-200,0);
-	wallGenerator(-70,0,-90,-90);
+	wallGenerator(-80,0,-240,-90);
 	wallGenerator(50,0,150,0);
 	wallGenerator(270,0,50,0)
 	

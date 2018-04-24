@@ -34,14 +34,14 @@ function animate() {
 		controls.getObject().translateX( velocity.x * delta );
 		controls.getObject().translateY( velocity.y * delta );
 		controls.getObject().translateZ( velocity.z * delta );
+		
 		if ( controls.getObject().position.y < 10 ) {
 			velocity.y = 0;
 			controls.getObject().position.y = 10;
-			canJump = true;
 		}
 		
 		//animates 
-		tempo[1].rotation.y -= time*.0000002; 
+		//tempo[1].rotation.y -= time*.0000002; 
 		renderer.clear();
 		renderer.render( scene, camera );
 		
