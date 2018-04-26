@@ -70,7 +70,7 @@ function init() {
 	
 	// Lexus Model
 
-	createObject('Lexus/Lexus/Lexus jpg.jpg','Lexus/Lexus/lexus_hs.obj',10,.1,50,2,-90);
+	createObject('Lexus/Lexus/Lexus jpg.jpg','Lexus/Lexus/lexus_hs.obj',10,.1,50,2,0);
 	
 	// Ship
 	var mtlLoader = new THREE.MTLLoader();
@@ -94,7 +94,7 @@ function init() {
 	createObject('Coke/Cola.jpg','Coke/Coke.obj',0,0,-100,.5,0);
 	
 	// Misc Object
-	createObject('src/textures/Grey.jpg','Car/Car.obj',270,0,-40,4,0);
+	createObject('src/textures/Grey.jpg','Car/car.obj',270,0,-40,4,0);
 	createObject('src/textures/Grey.jpg','Challenger/CHALLENGER71.obj',238,0,-122,10,-90);
 	createObject('src/textures/Grey.jpg','Porsche/Porsche_911_GT2.obj',125,7,-144,10,0);
 	
