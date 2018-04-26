@@ -47,7 +47,7 @@ function animate() {
 		
 		prevTime = time;
 		
-		console.log(controls.getObject().position.x,controls.getObject().position.y,controls.getObject().position.z);
+		//console.log(controls.getObject().position.x,controls.getObject().position.y,controls.getObject().position.z);
 	}
 	renderer.render( scene, camera );
 	requestAnimationFrame( animate );
