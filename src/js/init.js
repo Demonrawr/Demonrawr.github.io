@@ -70,9 +70,10 @@ function init() {
 	
 	// Lexus Model
 
-	createObject('Lexus/Lexus/Lexus jpg.jpg','Lexus/Lexus/lexus_hs.obj',10,.1,50,2,0);
+	createObject('Lexus/Lexus/Lexus jpg.jpg','Lexus/Lexus/lexus_hs.obj',10,.1,50,2,0,20);
 	
 	// Ship
+	/*
 	var mtlLoader = new THREE.MTLLoader();
 	mtlLoader.setBaseUrl( 'Kameri/' );
 	mtlLoader.setPath( 'Kameri/' );
@@ -82,33 +83,37 @@ function init() {
 		objLoader.setMaterials( materials );
 		objLoader.setPath( 'Kameri/' );
 		objLoader.load( 'Kameri explorer flying.obj', function ( object3 ) {
-			object3.position.y=10;
+			object3.position.y=70;
 			object3.position.x=1.3;
 			object3.position.z=150;
 			scene.add( object3 );
 			ship = object3;
 		}, onProgress, onError );
 	});
-	
+	*/
+	createMTL('Kameri/', 'Kameri_explorer_flying.mtl', 'Kameri explorer flying.obj', 1.3, 70, 150, 1, 0, 0);
+	createMTL('Tree/', 'Tree.mtl', 'Tree.obj', 100, 0, 102, 8, 0, 0);
+	createMTL('Tree/', 'Tree.mtl', 'Tree.obj', -46, 0, 102, 8, 0, 0);
+
 	// Coke Object
-	createObject('Coke/Cola.jpg','Coke/Coke.obj',0,0,-100,.5,0);
+	createObject('Coke/Cola.jpg','Coke/Coke.obj',0,0,-100,.5,0,0);
 	
 	// Misc Object
-	createObject('src/textures/Grey.jpg','Car/car.obj',270,0,-40,4,0);
-	createObject('src/textures/Grey.jpg','Challenger/CHALLENGER71.obj',238,0,-122,10,-90);
-	createObject('src/textures/Grey.jpg','Porsche/Porsche_911_GT2.obj',125,7,-144,10,0);
+	createObject('src/textures/Grey.jpg','Car/car.obj',270,0,-40,4,0,30);
+	createObject('src/textures/Grey.jpg','Challenger/CHALLENGER71.obj',238,0,-122,10,-90,0);
+	createObject('src/textures/Grey.jpg','Porsche/Porsche_911_GT2.obj',125,7,-144,10,0,110);
 	
 	// 2D Art
 	
 	pictureArt("src/textures/cogswell.jpg", 0, 15, -15,0);
 	pictureArt("src/textures/Traveler.jpg",50,15,-15,0);
-	pictureArt("src/textures/Henry.jpg",100,15,-15,0);
-	pictureArt("src/textures/Caroline.jpg",150,15,-15,0);
+	pictureArt("src/textures/Hen.jpg",100,15,-15,0);
+	pictureArt("src/textures/civic.jpg",150,15,-15,0);
 	pictureArt("src/textures/nobo.png",-65,15,21,-90);
 	pictureArt("src/textures/sky3.jpg",-65,15,80,-90);
-	pictureArt("src/textures/sky4.jpg",-25,15,135,0);
-	pictureArt("src/textures/sky.jpg",50,15,135,0);
-	pictureArt("src/textures/sky.jpg",135,15,82,-90);
+	pictureArt("src/textures/2002.jpg",-25,15,135,0);
+	pictureArt("src/textures/Beetle.jpg",50,15,135,0);
+	pictureArt("src/textures/Datsun.jpg",135,15,82,-90);
 	//Environment
 	
 	//Floor
