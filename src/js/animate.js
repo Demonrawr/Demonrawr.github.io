@@ -41,11 +41,12 @@ function animate() {
 		}
 		
 		//animates 
-		//tempo[1].rotation.y -= time*.0000002; 
+		ship.position.z += 0.001; 
 		renderer.clear();
 		renderer.render( scene, camera );
 		
 		prevTime = time;
+		
 		//console.log(controls.getObject().position.x,controls.getObject().position.y,controls.getObject().position.z);
 	}
 	renderer.render( scene, camera );

@@ -1,4 +1,4 @@
-function createObject(pic, model, xpos, ypos, zpos, scale) {
+function createObject(pic, model, xpos, ypos, zpos, scale, r) {
 	var Texture = new THREE.Texture();
 	var smanager = new THREE.LoadingManager();
 	smanager.onProgress = function ( item, loaded, total ) {
@@ -29,6 +29,9 @@ function createObject(pic, model, xpos, ypos, zpos, scale) {
 		Obj.position.y = ypos;
 		Obj.position.z = zpos;
 		Obj.scale.set(scale,scale,scale);
+		if (r!=0){
+			Obj.rotation.x=(r*Math.PI/180);
+		}
 		scene.add(Obj);
 		tempo.push(Obj);
 	}, onProgress, onError );
