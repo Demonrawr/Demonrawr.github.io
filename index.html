@@ -147,8 +147,10 @@
 		<button onclick="myFunction()" class="dropbtn">Menu:</button>
 		  <div id="myDropdown" class="dropdown-content">
 			<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+			<a href="#ls"><button class="button" onclick="readTextFile('Challenger/challenger_pos.txt')">Challenger</button></a>
 			<a href="#lol"><button class="button" onclick="readTextFile('Coke/cola.txt')">Cola</button></a>
 			<a href="#ls"><button class="button" onclick="readTextFile('Lexus/lexuspos.txt')">Lexus</button></a>
+			<a href="#ls"><button class="button" onclick="readTextFile('Porsche/posrche_pos.txt')">Porsche</button></a>
 			<a href="#ls"><button class="button" onclick="readTextFile('src/textures/travelerpos.txt')">Traveler</button></a>
 		  </div>
 		</div>
@@ -237,6 +239,7 @@
 				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 			}
 			window.onload = init();
+			
 			// Variables for user input, set to false
 			var controlsEnabled = false;
 			var moveForward = false;
